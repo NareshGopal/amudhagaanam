@@ -16,7 +16,11 @@ function Playlist(props) {
       <div className="card-body">
         <h5 className="card-title">{props.playlistInfo.name}</h5>
         <p className="card-text"></p>
-        <Link href="" className="btn btn-primary">
+        <Link
+          onClick={() => props.songsViewHandler(props.playlistInfo.id)}
+          href=""
+          className="btn btn-primary"
+        >
           View Songs
         </Link>
       </div>

@@ -18,6 +18,11 @@ function Playlists() {
     setplaylists(result);
   };
 
+  const songsViewHandler = (id) => {
+    const songList = playlists.filter((playlist) => playlist.id === id)[0]
+      .songs;
+  };
+
   return (
     <div
       className="playlists-container"
@@ -39,7 +44,7 @@ function Playlists() {
         />
       </div>
       {playlists.map((playlist) => (
-        <Playlist playlistInfo={playlist} />
+        <Playlist playlistInfo={playlist} clickHandler={songsViewHandler} />
       ))}
     </div>
   );
