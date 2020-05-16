@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Playlist(props) {
   return (
@@ -8,15 +9,16 @@ function Playlist(props) {
     >
       <img
         src="https://i.pinimg.com/originals/65/77/b7/6577b70fbefcc699bb1dd11ba170ba4e.jpg"
+        // src="../../public/playmusicicon.jpg"
         className="card-img-top"
         alt="Happy Listening"
       />
       <div className="card-body">
         <h5 className="card-title">{props.playlistInfo.name}</h5>
         <p className="card-text"></p>
-        <a href="" className="btn btn-primary">
+        <Link href="" className="btn btn-primary">
           View Songs
-        </a>
+        </Link>
       </div>
     </div>
   );

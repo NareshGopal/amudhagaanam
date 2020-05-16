@@ -35,6 +35,17 @@
   width: 100px;
 }
 
+.create-playlist-container {
+  margin: 10px;
+  width: 100%;
+  height: ;
+}
+
+.add-playlist-input {
+  margin: 10px;
+  width: 70%;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
