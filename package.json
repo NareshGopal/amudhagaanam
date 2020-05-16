@@ -1,0 +1,21 @@
+{
+  "name": "playlist",
+  "version": "0.0.1",
+  "description": "Playlist Coding Challenge",
+  "main": "index.js",
+  "proxy": "http://localhost:5000",
+  "scripts": {
+    "start": "node index.js",
+    "server": "nodemon index.js",
+    "amudhagaanam": "npm start --prefix amudhagaanam",
+    "amudhagaanaminstall": "npm install --prefix amudhagaanam",
+    "dev": "concurrently \"npm run server\" \"npm run amudhagaanam\""
+  },
+  "license": "MIT",
+  "dependencies": {
+    "async": "~0.2.5",
+    "connect-slashes": "^1.4.0",
+    "cors": "^2.8.5",
+    "express": "~3.1.0"
+  }
+}
