@@ -1,6 +1,6 @@
 import React from "react";
 
-function TableHeader() {
+function TableHeader(props) {
   return (
     <thead className="thead-dark">
       <tr>
@@ -10,7 +10,7 @@ function TableHeader() {
         <th scope="col">Album</th>
         <th scope="col">Artist</th>
 
-        <th scope="col">AddToPlaylist</th>
+        <th scope="col"> {props.removeSongFlag ? "Remove" : "Playlist"}</th>
       </tr>
     </thead>
   );

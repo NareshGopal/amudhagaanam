@@ -5,7 +5,7 @@ function TableBody(props) {
   return (
     <tbody>
       {songs.map((song) => (
-        <tr>
+        <tr className="song-record" key={song.id}>
           <th scope="row">{song.id}</th>
           <td>{song.title}</td>
           <td>{song.duration}</td>
@@ -14,7 +14,7 @@ function TableBody(props) {
 
           <td>
             <button type="button" className="btn btn-dark clickable">
-              Add to playlist
+              {props.removeSongFlag ? "-" : "+"}
             </button>
           </td>
         </tr>

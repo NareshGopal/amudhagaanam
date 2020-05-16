@@ -1,25 +1,37 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function Navbar() {
   return (
     <div className="navbar-container">
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <Link className="app-title" to="/">
+        <NavLink
+          activeStyle={{ fontWeight: "bold" }}
+          className="app-title"
+          to="/"
+        >
           Amudhagaanam
-        </Link>
+        </NavLink>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
-              <Link className="nav-link" to="/library">
-                Songs <span className="sr-only">(current)</span>
-              </Link>
+              <NavLink
+                activeStyle={{ fontWeight: "bold" }}
+                className="nav-link"
+                to="/library"
+              >
+                Library <span className="sr-only">(current)</span>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/playlists">
+              <NavLink
+                activeStyle={{ fontWeight: "bold" }}
+                className="nav-link"
+                to="/playlists"
+              >
                 Playlists
-              </Link>
+              </NavLink>
             </li>
           </ul>
           <form className="form-inline my-2 my-lg-0">

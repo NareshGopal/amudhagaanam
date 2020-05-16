@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Playlist from "./Playlist";
+import { getLibrary } from "../Services/libraryService";
 import { getPlaylists } from "../Services/playlistService";
 
-function Playlists() {
+function Playlists(props) {
+  const [songs, setSongs] = useState(getLibrary());
   const [playlists, setplaylists] = useState(getPlaylists());
   const [inputPlaylist, setInputPlaylist] = useState("");
-
-  const inputHandler = (e) => {
-    setInputPlaylist(e.target.value);
-  };
 
   const handlePlaylistAddition = () => {
     const result = [
@@ -16,12 +14,16 @@ function Playlists() {
       { id: playlists.length, name: inputPlaylist, songs: [] },
     ];
     setplaylists(result);
+    setInputPlaylist("");
   };
 
-  const songsViewHandler = (id) => {
-    const songList = playlists.filter((playlist) => playlist.id === id)[0]
-      .songs;
-  };
+  // const songsViewHandler = (id) => {
+  //   const songIds = playlists.filter((playlist) => playlist.id === id)[0].songs;
+  //   const filteredSongs = songs.filter((song) => {
+  //     const idPresence = songIds.indexOf(song.id);
+  //     return idPresence === -1 ? false : true;
+  //   });
+  // };
 
   return (
     <div
@@ -37,14 +39,14 @@ function Playlists() {
           Create Playlist
         </button>
         <input
-          onChange={inputHandler}
+          onChange={(e) => setInputPlaylist(e.target.value)}
           value={inputPlaylist}
           className="add-playlist-input"
           type="text"
         />
       </div>
       {playlists.map((playlist) => (
-        <Playlist playlistInfo={playlist} clickHandler={songsViewHandler} />
+        <Playlist playlistInfo={playlist} />
       ))}
     </div>
   );

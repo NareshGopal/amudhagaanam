@@ -5,8 +5,8 @@ import TableBody from "./TableBody";
 function Table(props) {
   return (
     <table className="table table-striped">
-      <TableHeader />
-      <TableBody data={props.data} />
+      <TableHeader removeSongFlag={props.removeSongFlag} />
+      <TableBody data={props.data} removeSongFlag={props.removeSongFlag} />
     </table>
   );
 }

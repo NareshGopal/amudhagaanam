@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function Playlist(props) {
+  const toLink = `/playlists/${props.playlistInfo.id}`;
+
   return (
     <div
       className="card"
@@ -17,9 +19,9 @@ function Playlist(props) {
         <h5 className="card-title">{props.playlistInfo.name}</h5>
         <p className="card-text"></p>
         <Link
-          onClick={() => props.songsViewHandler(props.playlistInfo.id)}
-          href=""
-          className="btn btn-primary"
+          // onClick={() => props.songsViewHandler(props.playlistInfo.id)}
+          to={toLink}
+          className="btn btn-primary view-songs-btn"
         >
           View Songs
         </Link>
