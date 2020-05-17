@@ -14,7 +14,7 @@ function PlaylistSongs(props) {
   let { id } = useParams();
 
   useEffect(() => {
-    setMyPlaylist(playlists[id].name);
+    setMyPlaylist(playlists.filter((pl) => pl.id == id)[0].name);
   }, [id, playlists]);
 
   const getSongsFromPlaylist = (id) => {
