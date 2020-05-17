@@ -19,15 +19,8 @@ const requestFailure = (error) => {
   };
 };
 
-const playlist_request = () => {
+const songRequest = () => {
   return {
     type: FETCH_SONG_REQUEST,
   };
-};
-
-export const createPlaylist = (playlist) => (dispatch) => {
-  dispatch({
-    type: CREATE_PLAYLIST,
-    payload: playlist,
-  });
 };

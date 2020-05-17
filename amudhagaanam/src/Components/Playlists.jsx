@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { createPlaylist } from "../Redux/Playlists/playlistAction";
+import {
+  createPlaylist,
+  fetchPlaylist,
+} from "../Redux/Playlists/playlistAction";
 import Playlist from "./Playlist";
 import { toast } from "react-toastify";
 import { getLibrary } from "../Services/libraryService";
 import { getPlaylists } from "../Services/playlistService";
 
-function Playlists({ playlists, createPlaylist }) {
+function Playlists({ playlists, createPlaylist, fetchPlaylist }) {
   const [songs, setSongs] = useState(getLibrary());
+
+  useEffect(() => {
+    fetchPlaylist();
+  }, []);
 
   const [inputPlaylist, setInputPlaylist] = useState("");
 
@@ -62,8 +69,10 @@ function Playlists({ playlists, createPlaylist }) {
 
 const mapStateToProps = ({ playlists }) => {
   return {
-    playlists,
+    playlists: playlists.data,
   };
 };
 
-export default connect(mapStateToProps, { createPlaylist })(Playlists);
+export default connect(mapStateToProps, { createPlaylist, fetchPlaylist })(
+  Playlists
+);

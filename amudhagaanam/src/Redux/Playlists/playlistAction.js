@@ -8,29 +8,53 @@ import {
   REMOVE_SONG_FROM_PLAYLIST,
 } from "../actionTypes";
 
-const requestSuccess = (data) => {
+const fetchPlaylistSuccess = (data) => {
   return {
     type: FETCH_PLAYLIST_SUCCESS,
     payload: data,
   };
 };
 
-const requestFailure = (error) => {
+const fetchPlaylistFailure = (error) => {
   return {
     type: FETCH_PLAYLIST_FAILURE,
     payload: error,
   };
 };
 
-const playlist_request = () => {
+const fetchPlaylistRequest = () => {
   return {
     type: FETCH_PLAYLIST_REQUEST,
   };
 };
 
-export const createPlaylist = (playlist) => (dispatch) => {
-  dispatch({
-    type: CREATE_PLAYLIST,
-    payload: playlist,
-  });
+let config = {
+  headers: {
+    "access-control-allow-origin": "*",
+  },
+};
+
+export const fetchPlaylist = () => {
+  return (dispatch) => {
+    dispatch(fetchPlaylistRequest());
+    axios
+      .get("http://localhost:5000/playlist/", config)
+      .then((res) => {
+        const playlists = res.data;
+        dispatch(fetchPlaylistSuccess(playlists));
+      })
+      .catch((err) => {
+        const errorMsg = err.message;
+        dispatch(fetchPlaylistFailure(errorMsg));
+      });
+  };
+};
+
+export const createPlaylist = (playlist) => {
+  return (dispatch) => {
+    dispatch({
+      type: CREATE_PLAYLIST,
+      payload: playlist,
+    });
+  };
 };
