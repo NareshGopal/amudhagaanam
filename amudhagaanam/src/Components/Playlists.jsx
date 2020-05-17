@@ -1,20 +1,27 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { createPlaylist } from "../Redux/Playlists/playlistAction";
 import Playlist from "./Playlist";
+import { toast } from "react-toastify";
 import { getLibrary } from "../Services/libraryService";
 import { getPlaylists } from "../Services/playlistService";
 
-function Playlists(props) {
+function Playlists({ playlists, createPlaylist }) {
   const [songs, setSongs] = useState(getLibrary());
-  const [playlists, setplaylists] = useState(getPlaylists());
+
   const [inputPlaylist, setInputPlaylist] = useState("");
 
   const handlePlaylistAddition = () => {
-    const result = [
-      ...playlists,
-      { id: playlists.length, name: inputPlaylist, songs: [] },
-    ];
-    setplaylists(result);
+    if (!inputPlaylist) {
+      toast.error("Enter a name for the playlist");
+      return;
+    }
+
+    const result = { id: playlists.length, name: inputPlaylist, songs: [] };
+    createPlaylist(result);
+
     setInputPlaylist("");
+    toast.success("New playlist has been created");
   };
 
   // const songsViewHandler = (id) => {
@@ -31,6 +38,13 @@ function Playlists(props) {
       style={{ width: "850px", height: "auto" }}
     >
       <div className="create-playlist-container">
+        <input
+          onChange={(e) => setInputPlaylist(e.target.value)}
+          value={inputPlaylist}
+          className="add-playlist-input"
+          type="text"
+          placeholder="Give a name for your new playlist"
+        />
         <button
           onClick={handlePlaylistAddition}
           type="button"
@@ -38,18 +52,18 @@ function Playlists(props) {
         >
           Create Playlist
         </button>
-        <input
-          onChange={(e) => setInputPlaylist(e.target.value)}
-          value={inputPlaylist}
-          className="add-playlist-input"
-          type="text"
-        />
       </div>
       {playlists.map((playlist) => (
-        <Playlist playlistInfo={playlist} />
+        <Playlist playlistInfo={playlist} key={playlist.id} />
       ))}
     </div>
   );
 }
 
-export default Playlists;
+const mapStateToProps = ({ playlists }) => {
+  return {
+    playlists,
+  };
+};
+
+export default connect(mapStateToProps, { createPlaylist })(Playlists);

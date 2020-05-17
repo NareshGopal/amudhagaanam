@@ -1,4 +1,5 @@
 import React from "react";
+import Search from "./Common/Search";
 
 function WelcomPage() {
   return (
@@ -8,6 +9,10 @@ function WelcomPage() {
       <br />
       <br />
       <h3>Happy Listening...</h3>
+      <br />
+      <br />
+
+      <Search />
     </div>
   );
 }

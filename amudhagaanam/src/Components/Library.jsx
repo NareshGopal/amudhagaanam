@@ -9,7 +9,6 @@ export default function Library() {
 
   useEffect(() => {
     const getSongs = () => {
-      console.log("here");
       const result = getLibrary();
       setSongs(result);
     };

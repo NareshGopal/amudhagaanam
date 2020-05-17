@@ -1,7 +1,9 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
+import Search from "./Common/Search";
 
 function Navbar() {
+  const { pathname } = useLocation();
   return (
     <div className="navbar-container">
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -34,20 +36,7 @@ function Navbar() {
               </NavLink>
             </li>
           </ul>
-          <form className="form-inline my-2 my-lg-0">
-            <input
-              className="form-control mr-sm-2"
-              type="search"
-              placeholder="Search your song"
-              aria-label="Search"
-            />
-            <button
-              className="btn btn-outline-success my-2 my-sm-0"
-              type="submit"
-            >
-              Search
-            </button>
-          </form>
+          {pathname !== "/" ? <Search /> : null}
         </div>
       </nav>
     </div>

@@ -25,7 +25,10 @@ body {
 .intro-page {
   width: 80rem;
   margin-top: 80px;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .songs-table-container {
@@ -57,6 +60,14 @@ body {
 }
 
 .add-playlist-input {
+  padding: 10px;
   margin: 10px;
   width: 70%;
+  height: 38px;
+  border-radius: 20px;
+  border: none;
 }
+
+/* .playlist-image {
+  padding: 8px;
+} */
