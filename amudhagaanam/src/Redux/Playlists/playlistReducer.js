@@ -4,6 +4,7 @@ import {
   FETCH_PLAYLIST_SUCCESS,
   FETCH_PLAYLIST_FAILURE,
   ADD_SONG_TO_PLAYLIST,
+  REMOVE_SONG_FROM_PLAYLIST,
 } from "../actionTypes";
 
 const initialState = {
@@ -47,10 +48,24 @@ export default function (state = initialState, action) {
         }
         return pl;
       });
-
       return {
         ...state,
         data: [...newStateData],
+      };
+
+    case REMOVE_SONG_FROM_PLAYLIST:
+      const { rsongId, rplaylistId } = payload;
+
+      const newStateDataR = state.data.map((pl) => {
+        if (pl.id == rplaylistId) {
+          let spliceIndex = pl.songs.indexOf(rsongId);
+          pl.songs.splice(spliceIndex, 1);
+        }
+        return pl;
+      });
+      return {
+        ...state,
+        data: [...newStateDataR],
       };
 
     default:

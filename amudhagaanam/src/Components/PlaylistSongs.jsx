@@ -1,21 +1,16 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { createPlaylist } from "../Redux/Playlists/playlistAction";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import Table from "./Common/Table";
-import { getLibrary } from "../Services/libraryService";
-import { getPlaylists } from "../Services/playlistService";
 
 function PlaylistSongs(props) {
-  console.log(props);
   const { playlists, songs } = props;
   const history = useHistory();
 
   let filteredSongs = [];
 
   const getSongsFromPlaylist = (id) => {
-    debugger;
     let songIds = playlists.filter((playlist) => playlist.id === +id)[0].songs;
 
     if (songIds.length == 0) {

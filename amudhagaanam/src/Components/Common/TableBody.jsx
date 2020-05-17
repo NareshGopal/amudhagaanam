@@ -1,17 +1,21 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import {
   showHidePopover,
   changeStyle,
 } from "../../Redux/Popover/popoverAction";
+import { removeSongFromPlaylist } from "../../Redux/Playlists/playlistAction";
 
 function TableBody(props) {
+  const params = useParams();
+
   const { data: songs } = props;
 
   const dispatch = useDispatch();
 
   const clickHandler = (e, data) => {
-    console.log("event object ", e);
     let style = {
       height: "250px",
       width: "200px",
@@ -21,8 +25,13 @@ function TableBody(props) {
     };
 
     dispatch(changeStyle({ style, data }));
-
     dispatch(showHidePopover(true));
+  };
+
+  const removeHandler = (data) => {
+    const payload = { rsongId: data, rplaylistId: params.id };
+    dispatch(removeSongFromPlaylist(payload));
+    toast.success("Songs has been remove from the playlist");
   };
 
   return (
@@ -37,7 +46,11 @@ function TableBody(props) {
 
             <td>
               <button
-                onClick={(e) => clickHandler(e, song.id)}
+                onClick={(e) => {
+                  props.removeSongFlag
+                    ? removeHandler(song.id)
+                    : clickHandler(e, song.id);
+                }}
                 type="button"
                 className="btn btn-dark clickable"
               >

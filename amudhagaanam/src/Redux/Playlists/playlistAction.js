@@ -71,3 +71,12 @@ export const addSongToPlaylist = (data) => {
     });
   };
 };
+
+export const removeSongFromPlaylist = (data) => {
+  return (dispatch) => {
+    dispatch({
+      type: REMOVE_SONG_FROM_PLAYLIST,
+      payload: data,
+    });
+  };
+};
