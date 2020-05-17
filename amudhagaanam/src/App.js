@@ -9,11 +9,16 @@ import Playlists from "./Components/Playlists";
 import PlaylistSongs from "./Components/PlaylistSongs";
 import NotFound from "./Components/NotFound";
 import WelcomePage from "./Components/WelcomPage";
+import { fetchSongs } from "./Redux/Songs/songsAction";
 
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 function App() {
+  useEffect(() => {
+    store.dispatch(fetchSongs());
+  }, []);
+
   return (
     <Provider store={store}>
       <div className="App">
