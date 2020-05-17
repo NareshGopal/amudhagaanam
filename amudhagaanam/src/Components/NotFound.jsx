@@ -1,7 +1,7 @@
 import React from "react";
 
 function NotFound() {
-  return <h1 style={{ marginTop: "80px" }}>Page not found! :(</h1>;
+  return <div className="not-found-page"></div>;
 }
 
 export default NotFound;

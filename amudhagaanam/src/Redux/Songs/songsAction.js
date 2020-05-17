@@ -4,6 +4,7 @@ import {
   FETCH_SONGS_REQUEST,
   FETCH_SONGS_SUCCESS,
 } from "../actionTypes";
+import trie from "../../Autocomplete/Trie";
 
 import { getLibrary } from "../../Services/libraryService";
 
@@ -35,6 +36,11 @@ export const fetchSongs = () => {
     //   .get("http://localhost:5000/library/")
     //   .then((res) => {
     //     const songs = res.data;
+    songs.map((song) => {
+      trie.insert(song.title.toLocaleLowerCase(), "song");
+      trie.insert(song.album.toLocaleLowerCase(), "album");
+      trie.insert(song.artist.toLocaleLowerCase(), "artist");
+    });
     dispatch(fetchSongSuccess(songs));
     // })
     // .catch((err) => {

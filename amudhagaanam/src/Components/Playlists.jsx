@@ -48,9 +48,11 @@ function Playlists({ playlists, createPlaylist, fetchPlaylist }) {
           Create Playlist
         </button>
       </div>
-      {playlists.map((playlist) => (
-        <Playlist playlistInfo={playlist} key={playlist.id} />
-      ))}
+      {playlists
+        .sort((a, b) => b.id - a.id)
+        .map((playlist) => (
+          <Playlist playlistInfo={playlist} key={playlist.id} />
+        ))}
     </div>
   );
 }

@@ -9,6 +9,7 @@ import Playlists from "./Components/Playlists";
 import PlaylistSongs from "./Components/PlaylistSongs";
 import NotFound from "./Components/NotFound";
 import WelcomePage from "./Components/WelcomPage";
+import SearchResultTable from "./Components/SearchResultTable";
 import { fetchSongs } from "./Redux/Songs/songsAction";
 import { fetchPlaylist } from "./Redux/Playlists/playlistAction";
 
@@ -17,8 +18,8 @@ import "./App.css";
 
 function App() {
   useEffect(() => {
-    store.dispatch(fetchPlaylist());
     store.dispatch(fetchSongs());
+    store.dispatch(fetchPlaylist());
   }, []);
 
   return (
@@ -27,6 +28,7 @@ function App() {
         <Navbar />
         <div>
           <Switch>
+            <Route path="/library/:type/:value" component={SearchResultTable} />
             <Route path="/library" component={Library} />
             <Route path="/playlists/:id" component={PlaylistSongs} />
             <Route path="/playlists" component={Playlists} />

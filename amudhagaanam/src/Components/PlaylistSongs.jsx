@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Table from "./Common/Table";
 
@@ -8,10 +8,19 @@ function PlaylistSongs(props) {
   const { playlists, songs } = props;
   const history = useHistory();
 
+  const [myPlaylist, setMyPlaylist] = useState("");
+
   let filteredSongs = [];
+  let { id } = useParams();
+
+  useEffect(() => {
+    setMyPlaylist(playlists[id].name);
+  }, [id]);
 
   const getSongsFromPlaylist = (id) => {
-    let songIds = playlists.filter((playlist) => playlist.id === +id)[0].songs;
+    let pl = playlists.filter((playlist) => playlist.id === +id);
+
+    let songIds = pl[0].songs;
 
     if (songIds.length == 0) {
       history.push("/library");
@@ -29,7 +38,9 @@ function PlaylistSongs(props) {
 
   return (
     <div className="songs-table-container">
-      <Table data={filteredSongs} removeSongFlag="true" />
+      <h1>{myPlaylist}</h1>
+      <br />
+      <Table data={filteredSongs} removeSongFlag={true} />
     </div>
   );
 }

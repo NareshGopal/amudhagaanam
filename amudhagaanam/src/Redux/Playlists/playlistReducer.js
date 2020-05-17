@@ -37,7 +37,7 @@ export default function (state = initialState, action) {
       const stateData = state.data;
       return {
         ...state,
-        data: [payload, ...stateData],
+        data: [...stateData, payload],
       };
     case ADD_SONG_TO_PLAYLIST:
       const { songId, playlistId } = payload;
