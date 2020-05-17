@@ -43,7 +43,7 @@ export default function (state = initialState, action) {
       const { songId, playlistId } = payload;
 
       const newStateData = state.data.map((pl) => {
-        if (pl.id === playlistId) {
+        if (pl.id == playlistId) {
           pl.songs.push(songId);
         }
         return pl;
@@ -57,7 +57,7 @@ export default function (state = initialState, action) {
       const { rsongId, rplaylistId } = payload;
 
       const newStateDataR = state.data.map((pl) => {
-        if (pl.id === rplaylistId) {
+        if (pl.id == rplaylistId) {
           let spliceIndex = pl.songs.indexOf(rsongId);
           pl.songs.splice(spliceIndex, 1);
         }
