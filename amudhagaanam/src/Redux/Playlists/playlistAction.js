@@ -36,11 +36,6 @@ let config = {
   },
 };
 
-export const fetchAllData = () => {
-  fetchPlaylist();
-  fetchSongs();
-};
-
 export const fetchPlaylist = () => {
   return (dispatch) => {
     dispatch(fetchPlaylistRequest());
@@ -64,6 +59,15 @@ export const createPlaylist = (playlist) => {
     dispatch({
       type: CREATE_PLAYLIST,
       payload: playlist,
+    });
+  };
+};
+
+export const addSongToPlaylist = (data) => {
+  return (dispatch) => {
+    dispatch({
+      type: ADD_SONG_TO_PLAYLIST,
+      payload: data,
     });
   };
 };

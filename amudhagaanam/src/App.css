@@ -36,6 +36,7 @@ body {
   height: auto;
   margin-top: 80px;
   text-align: center;
+  position: relative;
 }
 
 .view-songs-btn {
@@ -66,6 +67,10 @@ body {
   height: 38px;
   border-radius: 20px;
   border: none;
+}
+
+.list-group-item:hover {
+  background-color: #f5f5f5;
 }
 
 /* .playlist-image {

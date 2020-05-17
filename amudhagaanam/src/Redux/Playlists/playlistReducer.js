@@ -3,6 +3,7 @@ import {
   FETCH_PLAYLIST_REQUEST,
   FETCH_PLAYLIST_SUCCESS,
   FETCH_PLAYLIST_FAILURE,
+  ADD_SONG_TO_PLAYLIST,
 } from "../actionTypes";
 
 const initialState = {
@@ -36,6 +37,20 @@ export default function (state = initialState, action) {
       return {
         ...state,
         data: [payload, ...stateData],
+      };
+    case ADD_SONG_TO_PLAYLIST:
+      const { songId, playlistId } = payload;
+
+      const newStateData = state.data.map((pl) => {
+        if (pl.id == playlistId) {
+          pl.songs.push(songId);
+        }
+        return pl;
+      });
+
+      return {
+        ...state,
+        data: [...newStateData],
       };
 
     default:
