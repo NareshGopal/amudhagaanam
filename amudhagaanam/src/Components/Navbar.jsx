@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import { connect } from "react-redux";
+import { fetchSongs } from "../Redux/Songs/songsAction";
 import Search from "./Common/Search";
 
-function Navbar() {
+function Navbar({ fetchSongs }) {
+  useEffect(() => {
+    fetchSongs();
+  }, []);
+
   const { pathname } = useLocation();
   return (
     <div className="navbar-container">
@@ -43,4 +49,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default connect(null, { fetchSongs })(Navbar);

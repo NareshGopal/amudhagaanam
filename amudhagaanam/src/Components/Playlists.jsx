@@ -6,12 +6,8 @@ import {
 } from "../Redux/Playlists/playlistAction";
 import Playlist from "./Playlist";
 import { toast } from "react-toastify";
-import { getLibrary } from "../Services/libraryService";
-import { getPlaylists } from "../Services/playlistService";
 
 function Playlists({ playlists, createPlaylist, fetchPlaylist }) {
-  const [songs, setSongs] = useState(getLibrary());
-
   useEffect(() => {
     fetchPlaylist();
   }, []);
@@ -30,14 +26,6 @@ function Playlists({ playlists, createPlaylist, fetchPlaylist }) {
     setInputPlaylist("");
     toast.success("New playlist has been created");
   };
-
-  // const songsViewHandler = (id) => {
-  //   const songIds = playlists.filter((playlist) => playlist.id === id)[0].songs;
-  //   const filteredSongs = songs.filter((song) => {
-  //     const idPresence = songIds.indexOf(song.id);
-  //     return idPresence === -1 ? false : true;
-  //   });
-  // };
 
   return (
     <div

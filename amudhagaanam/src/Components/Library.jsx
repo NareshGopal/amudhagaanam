@@ -1,23 +1,20 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
+import { connect } from "react-redux";
 
 import Table from "./Common/Table";
-import { getLibrary } from "../Services/libraryService";
 
-export default function Library() {
-  const [songs, setSongs] = useState([]);
-
-  useEffect(() => {
-    const getSongs = () => {
-      const result = getLibrary();
-      setSongs(result);
-    };
-    getSongs();
-  }, []);
-
+function Library({ songs }) {
   return (
     <div className="songs-table-container">
       <Table data={songs} />
     </div>
   );
 }
+
+const mapStateToProps = ({ songs }) => {
+  return {
+    songs: songs.data,
+  };
+};
+
+export default connect(mapStateToProps)(Library);
