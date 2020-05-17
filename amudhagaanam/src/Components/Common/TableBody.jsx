@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import moment from "moment";
 import {
   showHidePopover,
   changeStyle,
@@ -41,7 +42,7 @@ function TableBody(props) {
         {songs.map((song) => (
           <tr className="song-record" key={song.id}>
             <td>{song.title}</td>
-            <td>{song.duration}</td>
+            <td>{moment.utc(song.duration * 1000).format("mm:ss")}</td>
             <td>{song.album}</td>
             <td>{song.artist}</td>
 
