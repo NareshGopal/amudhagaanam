@@ -46,7 +46,7 @@ function Search() {
         <input
           className="form-control mr-sm-2"
           type="search"
-          placeholder="Search your song"
+          placeholder="Search for a song (Eg., anthem)"
           aria-label="Search"
           onChange={changeHandler}
         />

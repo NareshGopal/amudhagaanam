@@ -23,6 +23,7 @@ body {
 }
 
 .nav-bar-list {
+  position: fixed !important;
   display: flex !important;
   flex-flow: row nowrap !important;
   margin-right: 0 !important;

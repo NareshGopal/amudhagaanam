@@ -6,6 +6,8 @@ import Table from "./Common/Table";
 function Library({ songs }) {
   return (
     <div className="songs-table-container">
+      <h1>All Songs</h1>
+      <br />
       <Table data={songs} />
     </div>
   );
