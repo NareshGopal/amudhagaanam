@@ -32,7 +32,11 @@ export default function (state = initialState, action) {
         error: payload,
       };
     case CREATE_PLAYLIST:
-      return [payload, ...state];
+      const stateData = state.data;
+      return {
+        ...state,
+        data: [payload, ...stateData],
+      };
 
     default:
       return state;
