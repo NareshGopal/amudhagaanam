@@ -8,9 +8,9 @@ import Playlist from "./Playlist";
 import { toast } from "react-toastify";
 
 function Playlists({ playlists, createPlaylist, fetchPlaylist }) {
-  useEffect(() => {
-    fetchPlaylist();
-  }, []);
+  // useEffect(() => {
+  //   fetchPlaylist();
+  // }, []);
 
   const [inputPlaylist, setInputPlaylist] = useState("");
 

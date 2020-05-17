@@ -10,12 +10,14 @@ import PlaylistSongs from "./Components/PlaylistSongs";
 import NotFound from "./Components/NotFound";
 import WelcomePage from "./Components/WelcomPage";
 import { fetchSongs } from "./Redux/Songs/songsAction";
+import { fetchPlaylist } from "./Redux/Playlists/playlistAction";
 
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 function App() {
   useEffect(() => {
+    store.dispatch(fetchPlaylist());
     store.dispatch(fetchSongs());
   }, []);
 
