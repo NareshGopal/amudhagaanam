@@ -24,6 +24,8 @@ class Trie {
       case "album":
         current.isAlbum = true;
         break;
+      default:
+        break;
     }
   }
 
@@ -31,7 +33,7 @@ class Trie {
     let current = this.root;
     for (let i = 0; i < word.length; i++) {
       let child = current.getChild(word.charAt(i));
-      if (child == undefined) return null;
+      if (child === undefined) return null;
       current = child;
     }
     return current;
@@ -39,7 +41,7 @@ class Trie {
 
   autoComplete(word) {
     const words = [];
-    if (word.length == 0) return words;
+    if (word.length === 0) return words;
     let lastNode = this.findLastNode(word);
     if (lastNode == null) return words;
     this.autoCompleteRec(lastNode, word, words);

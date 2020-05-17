@@ -2,7 +2,6 @@ import React from "react";
 import trie from "../../Autocomplete/Trie";
 import ListGroup from "../ListGroup";
 import { useSelector, useDispatch } from "react-redux";
-import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
 import {
   showHidePopover,
@@ -17,7 +16,7 @@ function Search() {
   const changeHandler = (e) => {
     let style = {
       height: "250px",
-      width: "227px",
+      width: "300px",
       left: e.target.offsetLeft,
       top: e.target.offsetTop + 40,
       position: "fixed",
@@ -25,7 +24,7 @@ function Search() {
 
     let searchString = e.target.value;
     let searchResult = trie.autoComplete(searchString.toLowerCase());
-    if (searchResult.length == 0 && searchString.length > 0) {
+    if (searchResult.length === 0 && searchString.length > 0) {
       searchResult.push({ name: "No results found", id: "0" });
     }
 

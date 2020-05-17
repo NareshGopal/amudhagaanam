@@ -9,7 +9,7 @@ function SearchResultTable() {
   const songs = useSelector((state) => state.songs.data);
 
   const filteredSongs = songs.filter(
-    (song) => song[type].toLowerCase() == value
+    (song) => song[type].toLowerCase() === value
   );
 
   return (

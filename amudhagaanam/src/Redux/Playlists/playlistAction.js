@@ -9,7 +9,7 @@ import {
 } from "../actionTypes";
 
 import { getPlaylists } from "../../Services/playlistService";
-import { fetchSongs } from "../Songs/songsAction";
+
 const fetchPlaylistSuccess = (data) => {
   return {
     type: FETCH_PLAYLIST_SUCCESS,

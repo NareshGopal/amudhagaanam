@@ -15,14 +15,14 @@ function PlaylistSongs(props) {
 
   useEffect(() => {
     setMyPlaylist(playlists[id].name);
-  }, [id]);
+  }, [id, playlists]);
 
   const getSongsFromPlaylist = (id) => {
     let pl = playlists.filter((playlist) => playlist.id === +id);
 
     let songIds = pl[0].songs;
 
-    if (songIds.length == 0) {
+    if (songIds.length === 0) {
       history.push("/library");
       toast.info("Click + to add songs to your playlist");
       return;
