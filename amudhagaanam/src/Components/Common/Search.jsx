@@ -7,6 +7,7 @@ import {
   showHidePopover,
   changeStyle,
 } from "../../Redux/Popover/popoverAction";
+import { auto } from "async";
 
 function Search() {
   const { style, visibility, data } = useSelector((state) => state.popover);
@@ -15,11 +16,12 @@ function Search() {
 
   const changeHandler = (e) => {
     let style = {
-      height: "250px",
+      height: "273px",
       width: "300px",
       left: e.target.offsetLeft,
       top: e.target.offsetTop + 40,
       position: "fixed",
+      overflow: "auto",
     };
 
     let searchString = e.target.value;

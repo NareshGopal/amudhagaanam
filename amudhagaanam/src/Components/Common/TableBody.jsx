@@ -17,11 +17,12 @@ function TableBody(props) {
 
   const clickHandler = (e, data) => {
     let style = {
-      height: "250px",
+      height: "273px",
       width: "200px",
       left: e.clientX - 225,
       top: e.clientY,
       position: "fixed",
+      overflow: "auto",
     };
 
     dispatch(changeStyle({ style, data }));

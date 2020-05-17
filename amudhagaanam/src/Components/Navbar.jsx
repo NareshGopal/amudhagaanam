@@ -9,11 +9,15 @@ function Navbar() {
     <div className="navbar-container">
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <NavLink
-          activeStyle={{ fontWeight: "bold" }}
+          activeStyle={{
+            fontWeight: "bold",
+            color: "#fff",
+            textDecoration: "none",
+          }}
           className="app-title"
           to="/"
         >
-          Amudhagaanam
+          Amudhagaanam |
         </NavLink>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
