@@ -32,7 +32,7 @@ function Search() {
     dispatch(showHidePopover(true));
   };
 
-  const clickHandler = (id, resultItem) => {
+  const clickHandler = (resultItem) => {
     dispatch(showHidePopover(false));
     const { type, name } = resultItem;
     history.push(`/library/${type}/${name}`);
@@ -51,7 +51,7 @@ function Search() {
         {/* <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
           Search
         </button> */}
-        {visibility ? (
+        {visibility && data.length > 0 ? (
           <ListGroup
             itemsList={data}
             style={style}

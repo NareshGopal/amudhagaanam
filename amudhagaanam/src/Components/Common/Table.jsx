@@ -16,7 +16,7 @@ function Table(props) {
   const dispatch = useDispatch();
 
   const insertSongToPlaylist = (playlistId) => {
-    const payload = { songId, playlistId };
+    const payload = { songId, playlistId: playlistId.id };
     dispatch(showHidePopover(false));
     dispatch(addSongToPlaylist(payload));
 
@@ -29,7 +29,7 @@ function Table(props) {
         <TableHeader removeSongFlag={props.removeSongFlag} />
         <TableBody data={props.data} removeSongFlag={props.removeSongFlag} />
       </table>
-      {visibility ? (
+      {visibility && playlists.data.length > 0 ? (
         <ListGroup
           itemsList={playlists.data}
           style={style}
