@@ -16,18 +16,18 @@ export default function (state = initialState, action) {
   switch (type) {
     case FETCH_PLAYLIST_REQUEST:
       return {
-        ...initialState,
+        ...state,
         isLoading: true,
       };
     case FETCH_PLAYLIST_SUCCESS:
       return {
-        ...initialState,
+        ...state,
         isLoading: false,
         data: payload,
       };
     case FETCH_PLAYLIST_FAILURE:
       return {
-        ...initialState,
+        ...state,
         isLoading: false,
         error: payload,
       };
@@ -35,6 +35,6 @@ export default function (state = initialState, action) {
       return [payload, ...state];
 
     default:
-      return initialState;
+      return state;
   }
 }

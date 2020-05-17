@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { playlists } from "../Services/playlistService";
 
 function Playlist({ playlistInfo }) {
   const toLink = `/playlists/${playlistInfo.id}`;
@@ -30,7 +29,7 @@ function Playlist({ playlistInfo }) {
           to={toLink}
           className="btn btn-primary view-songs-btn"
         >
-          {playlistInfo.songs.length == 0 ? "Add Songs" : "View Songs"}
+          {playlistInfo.songs.length === 0 ? "Add Songs" : "View Songs"}
         </Link>
       </div>
     </div>

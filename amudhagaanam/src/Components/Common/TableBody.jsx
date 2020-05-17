@@ -6,7 +6,6 @@ function TableBody(props) {
     <tbody>
       {songs.map((song) => (
         <tr className="song-record" key={song.id}>
-          <th scope="row">{song.id}</th>
           <td>{song.title}</td>
           <td>{song.duration}</td>
           <td>{song.album}</td>

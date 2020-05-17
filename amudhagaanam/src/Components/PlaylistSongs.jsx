@@ -8,9 +8,8 @@ import { getLibrary } from "../Services/libraryService";
 import { getPlaylists } from "../Services/playlistService";
 
 function PlaylistSongs(props) {
-  const [songs, setSongs] = useState(getLibrary());
-
-  const { playlists } = props;
+  console.log(props);
+  const { playlists, songs } = props;
   const history = useHistory();
 
   let filteredSongs = [];
@@ -40,9 +39,10 @@ function PlaylistSongs(props) {
   );
 }
 
-const mapStateToProps = ({ playlists }) => {
+const mapStateToProps = ({ playlists, songs }) => {
   return {
-    playlists,
+    songs: songs.data,
+    playlists: playlists.data,
   };
 };
 

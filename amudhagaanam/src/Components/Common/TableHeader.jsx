@@ -4,7 +4,6 @@ function TableHeader(props) {
   return (
     <thead className="thead-dark">
       <tr>
-        <th scope="col">Id</th>
         <th scope="col">Name</th>
         <th scope="col">Duration</th>
         <th scope="col">Album</th>
