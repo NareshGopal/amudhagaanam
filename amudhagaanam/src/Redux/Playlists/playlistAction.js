@@ -4,6 +4,7 @@ import {
   FETCH_PLAYLIST_SUCCESS,
   FETCH_PLAYLIST_REQUEST,
   CREATE_PLAYLIST,
+  DELETE_PLAYLIST,
   ADD_SONG_TO_PLAYLIST,
   REMOVE_SONG_FROM_PLAYLIST,
 } from "../actionTypes";
@@ -59,6 +60,15 @@ export const createPlaylist = (playlist) => {
     dispatch({
       type: CREATE_PLAYLIST,
       payload: playlist,
+    });
+  };
+};
+
+export const deletePlaylist = (playlistId) => {
+  return (dispatch) => {
+    dispatch({
+      type: DELETE_PLAYLIST,
+      payload: playlistId,
     });
   };
 };

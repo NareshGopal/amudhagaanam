@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Playlist({ playlistInfo }) {
+function Playlist({ playlistInfo, deletePlaylistHandler }) {
   const toLink = `/playlists/${playlistInfo.id}`;
   let playlistName = playlistInfo.name;
   let nameLength = playlistName.length;
@@ -24,13 +24,15 @@ function Playlist({ playlistInfo }) {
             : playlistName}
         </h5>
         <p className="card-text"></p>
-        <Link
-          // onClick={() => props.songsViewHandler(props.playlistInfo.id)}
-          to={toLink}
-          className="btn btn-primary view-songs-btn"
-        >
+        <Link to={toLink} className="btn btn-primary view-songs-btn">
           {playlistInfo.songs.length === 0 ? "Add Songs" : "View Songs"}
         </Link>
+        <button
+          onClick={() => deletePlaylistHandler(playlistInfo.id)}
+          className="btn btn-primary delete-songs-btn"
+        >
+          Delete Playlist
+        </button>
       </div>
     </div>
   );

@@ -56,10 +56,15 @@ body {
   position: relative;
 }
 
-.view-songs-btn {
+.view-songs-btn,
+.delete-songs-btn {
   color: #fff !important;
   background-color: #6c757d !important;
   border-color: #6c757d !important;
+}
+
+.delete-songs-btn {
+  margin-top: 15px !important;
 }
 
 .playlists-container {

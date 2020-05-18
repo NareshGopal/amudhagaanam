@@ -1,11 +1,13 @@
 import {
   CREATE_PLAYLIST,
+  DELETE_PLAYLIST,
   FETCH_PLAYLIST_REQUEST,
   FETCH_PLAYLIST_SUCCESS,
   FETCH_PLAYLIST_FAILURE,
   ADD_SONG_TO_PLAYLIST,
   REMOVE_SONG_FROM_PLAYLIST,
 } from "../actionTypes";
+import store from "../store";
 
 const initialState = {
   isLoading: false,
@@ -38,6 +40,13 @@ export default function (state = initialState, action) {
       return {
         ...state,
         data: [...stateData, payload],
+      };
+
+    case DELETE_PLAYLIST:
+      const revisedData = state.data.filter((pl) => pl.id != payload);
+      return {
+        ...state,
+        data: [...revisedData],
       };
     case ADD_SONG_TO_PLAYLIST:
       const { songId, playlistId } = payload;

@@ -1,13 +1,19 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import { toast } from "react-toastify";
 import {
   createPlaylist,
   fetchPlaylist,
+  deletePlaylist,
 } from "../Redux/Playlists/playlistAction";
 import Playlist from "./Playlist";
-import { toast } from "react-toastify";
 
-function Playlists({ playlists, createPlaylist, fetchPlaylist }) {
+function Playlists({
+  playlists,
+  createPlaylist,
+  fetchPlaylist,
+  deletePlaylist,
+}) {
   // useEffect(() => {
   //   fetchPlaylist();
   // }, []);
@@ -25,6 +31,10 @@ function Playlists({ playlists, createPlaylist, fetchPlaylist }) {
 
     setInputPlaylist("");
     toast.success("New playlist has been created");
+  };
+
+  const deletePlaylistHandler = (playlistId) => {
+    deletePlaylist(playlistId);
   };
 
   return (
@@ -51,7 +61,11 @@ function Playlists({ playlists, createPlaylist, fetchPlaylist }) {
       {playlists
         .sort((a, b) => b.id - a.id)
         .map((playlist) => (
-          <Playlist playlistInfo={playlist} key={playlist.id} />
+          <Playlist
+            key={playlist.id}
+            playlistInfo={playlist}
+            deletePlaylistHandler={deletePlaylistHandler}
+          />
         ))}
     </div>
   );
@@ -63,6 +77,8 @@ const mapStateToProps = ({ playlists }) => {
   };
 };
 
-export default connect(mapStateToProps, { createPlaylist, fetchPlaylist })(
-  Playlists
-);
+export default connect(mapStateToProps, {
+  createPlaylist,
+  fetchPlaylist,
+  deletePlaylist,
+})(Playlists);
