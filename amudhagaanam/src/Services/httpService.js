@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const endpointURL = "https://mpplaylistbackend.herokuapp.com";
+const endpointURL = "https://localhost:5000";
 
 export default {
   get: axios.get,
