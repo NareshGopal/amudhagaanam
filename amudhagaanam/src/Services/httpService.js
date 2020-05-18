@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const endpointURL = "https://localhost:5000";
+const endpointURL = "http://localhost:5000";
 
 export default {
   get: axios.get,
