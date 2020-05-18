@@ -19,8 +19,6 @@ function Table(props) {
     const payload = { songId, playlistId: playlistId.id };
     dispatch(showHidePopover(false));
     dispatch(addSongToPlaylist(payload));
-
-    toast.success("Song has been added to the playlist");
   };
 
   return (

@@ -31,21 +31,21 @@ const fetchSongRequest = () => {
 export const fetchSongs = () => {
   return (dispatch) => {
     dispatch(fetchSongRequest());
-    const songs = getLibrary();
-    // axios
-    //   .get("http://localhost:5000/library/")
-    //   .then((res) => {
-    //     const songs = res.data;
-    songs.map((song) => {
-      trie.insert(song.title.toLocaleLowerCase(), "song");
-      trie.insert(song.album.toLocaleLowerCase(), "album");
-      trie.insert(song.artist.toLocaleLowerCase(), "artist");
-    });
-    dispatch(fetchSongSuccess(songs));
-    // })
-    // .catch((err) => {
-    //   const errorMsg = err.message;
-    //   dispatch(fetchSongFailure(errorMsg));
-    // });
+    // const songs = getLibrary();
+    axios
+      .get("https://mpplaylistbackend.herokuapp.com/library")
+      .then((res) => {
+        const songs = res.data;
+        songs.map((song) => {
+          trie.insert(song.title.toLocaleLowerCase(), "song");
+          trie.insert(song.album.toLocaleLowerCase(), "album");
+          trie.insert(song.artist.toLocaleLowerCase(), "artist");
+        });
+        dispatch(fetchSongSuccess(songs));
+      })
+      .catch((err) => {
+        const errorMsg = err.message;
+        dispatch(fetchSongFailure(errorMsg));
+      });
   };
 };

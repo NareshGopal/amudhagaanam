@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 import {
   FETCH_PLAYLIST_FAILURE,
   FETCH_PLAYLIST_SUCCESS,
@@ -10,6 +11,7 @@ import {
 } from "../actionTypes";
 
 import { getPlaylists } from "../../Services/playlistService";
+import Playlist from "../../Components/Playlist";
 
 const fetchPlaylistSuccess = (data) => {
   return {
@@ -31,62 +33,97 @@ const fetchPlaylistRequest = () => {
   };
 };
 
-let config = {
-  headers: {
-    "access-control-allow-origin": "*",
-  },
-};
-
 export const fetchPlaylist = () => {
   return (dispatch) => {
     dispatch(fetchPlaylistRequest());
     const playlists = getPlaylists();
 
-    // axios
-    //   .get("http://localhost:5000/playlist/", config)
-    //   .then((res) => {
-    //     const playlists = res.data;
-    dispatch(fetchPlaylistSuccess(playlists));
-    //   })
-    //   .catch((err) => {
-    //     const errorMsg = err.message;
-    //     dispatch(fetchPlaylistFailure(errorMsg));
-    //   });
+    axios
+      .get("https://mpplaylistbackend.herokuapp.com/playlist")
+      .then((res) => {
+        const playlists = res.data;
+        dispatch(fetchPlaylistSuccess(playlists));
+      })
+      .catch((err) => {
+        const errorMsg = err.message;
+        dispatch(fetchPlaylistFailure(errorMsg));
+      });
   };
 };
 
 export const createPlaylist = (playlist) => {
   return (dispatch) => {
-    dispatch({
-      type: CREATE_PLAYLIST,
-      payload: playlist,
-    });
+    axios
+      .post(
+        `https://mpplaylistbackend.herokuapp.com/playlist/${playlist.id}`,
+        playlist
+      )
+      .then(() => {
+        dispatch({
+          type: CREATE_PLAYLIST,
+          payload: playlist,
+        });
+        toast.success("New playlist has been created");
+      })
+      .catch(() => {
+        toast.error("Error in creating playlist");
+      });
   };
 };
 
 export const deletePlaylist = (playlistId) => {
   return (dispatch) => {
-    dispatch({
-      type: DELETE_PLAYLIST,
-      payload: playlistId,
-    });
+    axios
+      .delete(`https://mpplaylistbackend.herokuapp.com/playlist/${playlistId}`)
+      .then(() => {
+        dispatch({
+          type: DELETE_PLAYLIST,
+          payload: playlistId,
+        });
+        toast.success("Playlist has been removed");
+      })
+      .catch(() => {
+        toast.error("Error in deleting playlist");
+      });
   };
 };
 
 export const addSongToPlaylist = (data) => {
   return (dispatch) => {
-    dispatch({
-      type: ADD_SONG_TO_PLAYLIST,
-      payload: data,
-    });
+    const { songId, playlistId } = data;
+    axios
+      .post(
+        `https://mpplaylistbackend.herokuapp.com/playlist/${playlistId}/${songId}`
+      )
+      .then(() => {
+        dispatch({
+          type: ADD_SONG_TO_PLAYLIST,
+          payload: data,
+        });
+        toast.success("Song has been added to the playlist");
+      })
+      .catch(() => {
+        toast.error("Error in adding song to playlist");
+      });
   };
 };
 
 export const removeSongFromPlaylist = (data) => {
   return (dispatch) => {
-    dispatch({
-      type: REMOVE_SONG_FROM_PLAYLIST,
-      payload: data,
-    });
+    const { rsongId, rplaylistId } = data;
+    axios
+      .delete(
+        `https://mpplaylistbackend.herokuapp.com/playlist/${rplaylistId}/${rsongId}`
+      )
+      .then(() => {
+        dispatch({
+          type: REMOVE_SONG_FROM_PLAYLIST,
+          payload: data,
+        });
+        toast.success("Song has been removed from the playlist");
+      })
+      .catch(() => {
+        toast.error("Error in deleting song from playlist");
+      });
   };
 };

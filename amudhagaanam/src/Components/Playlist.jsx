@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 function Playlist({ playlistInfo, deletePlaylistHandler }) {
   const toLink = `/playlists/${playlistInfo.id}`;
   let playlistName = playlistInfo.name;
+
   let nameLength = playlistName.length;
 
   return (

@@ -33,7 +33,6 @@ function TableBody(props) {
   const removeHandler = (data) => {
     const payload = { rsongId: data, rplaylistId: params.id };
     dispatch(removeSongFromPlaylist(payload));
-    toast.success("Songs has been remove from the playlist");
   };
 
   return (

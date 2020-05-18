@@ -27,10 +27,10 @@ function Playlists({
     }
 
     const result = { id: playlists.length, name: inputPlaylist, songs: [] };
+    debugger;
     createPlaylist(result);
 
     setInputPlaylist("");
-    toast.success("New playlist has been created");
   };
 
   const deletePlaylistHandler = (playlistId) => {
