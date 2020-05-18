@@ -1,4 +1,3 @@
-import axios from "axios";
 import { toast } from "react-toastify";
 import {
   FETCH_PLAYLIST_FAILURE,
@@ -53,9 +52,10 @@ export const fetchPlaylist = () => {
 
 export const createPlaylist = (playlist) => {
   return (dispatch) => {
-    axios
-      .post(`${endpointURL}/playlist/${playlist.id}`, playlist)
-      .then(() => {
+    http
+      .post(`${endpointURL}/playlist`, playlist)
+      .then((res) => {
+        playlist = { ...playlist, id: res.data.id };
         dispatch({
           type: CREATE_PLAYLIST,
           payload: playlist,
@@ -70,7 +70,7 @@ export const createPlaylist = (playlist) => {
 
 export const deletePlaylist = (playlistId) => {
   return (dispatch) => {
-    axios
+    http
       .delete(`${endpointURL}/playlist/${playlistId}`)
       .then(() => {
         dispatch({
@@ -88,7 +88,7 @@ export const deletePlaylist = (playlistId) => {
 export const addSongToPlaylist = (data) => {
   return (dispatch) => {
     const { songId, playlistId } = data;
-    axios
+    http
       .post(`${endpointURL}/playlist/${playlistId}/${songId}`)
       .then(() => {
         dispatch({
@@ -106,7 +106,7 @@ export const addSongToPlaylist = (data) => {
 export const removeSongFromPlaylist = (data) => {
   return (dispatch) => {
     const { rsongId, rplaylistId } = data;
-    axios
+    http
       .delete(`${endpointURL}/playlist/${rplaylistId}/${rsongId}`)
       .then(() => {
         dispatch({

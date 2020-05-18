@@ -14,10 +14,6 @@ function Playlists({
   fetchPlaylist,
   deletePlaylist,
 }) {
-  // useEffect(() => {
-  //   fetchPlaylist();
-  // }, []);
-
   const [inputPlaylist, setInputPlaylist] = useState("");
 
   const handlePlaylistAddition = () => {
@@ -26,8 +22,8 @@ function Playlists({
       return;
     }
 
-    const result = { id: playlists.length, name: inputPlaylist, songs: [] };
-    debugger;
+    const result = { id: null, name: inputPlaylist, songs: [] };
+
     createPlaylist(result);
 
     setInputPlaylist("");
