@@ -10,8 +10,9 @@ import {
   REMOVE_SONG_FROM_PLAYLIST,
 } from "../actionTypes";
 
-import { getPlaylists } from "../../Services/playlistService";
-import Playlist from "../../Components/Playlist";
+import http from "../../Services/httpService";
+
+const endpointURL = http.endpointURL;
 
 const fetchPlaylistSuccess = (data) => {
   return {
@@ -36,10 +37,9 @@ const fetchPlaylistRequest = () => {
 export const fetchPlaylist = () => {
   return (dispatch) => {
     dispatch(fetchPlaylistRequest());
-    const playlists = getPlaylists();
 
-    axios
-      .get("https://mpplaylistbackend.herokuapp.com/playlist")
+    http
+      .get(`${endpointURL}/playlist`)
       .then((res) => {
         const playlists = res.data;
         dispatch(fetchPlaylistSuccess(playlists));
@@ -54,10 +54,7 @@ export const fetchPlaylist = () => {
 export const createPlaylist = (playlist) => {
   return (dispatch) => {
     axios
-      .post(
-        `https://mpplaylistbackend.herokuapp.com/playlist/${playlist.id}`,
-        playlist
-      )
+      .post(`${endpointURL}/playlist/${playlist.id}`, playlist)
       .then(() => {
         dispatch({
           type: CREATE_PLAYLIST,
@@ -74,7 +71,7 @@ export const createPlaylist = (playlist) => {
 export const deletePlaylist = (playlistId) => {
   return (dispatch) => {
     axios
-      .delete(`https://mpplaylistbackend.herokuapp.com/playlist/${playlistId}`)
+      .delete(`${endpointURL}/playlist/${playlistId}`)
       .then(() => {
         dispatch({
           type: DELETE_PLAYLIST,
@@ -92,9 +89,7 @@ export const addSongToPlaylist = (data) => {
   return (dispatch) => {
     const { songId, playlistId } = data;
     axios
-      .post(
-        `https://mpplaylistbackend.herokuapp.com/playlist/${playlistId}/${songId}`
-      )
+      .post(`${endpointURL}/playlist/${playlistId}/${songId}`)
       .then(() => {
         dispatch({
           type: ADD_SONG_TO_PLAYLIST,
@@ -112,9 +107,7 @@ export const removeSongFromPlaylist = (data) => {
   return (dispatch) => {
     const { rsongId, rplaylistId } = data;
     axios
-      .delete(
-        `https://mpplaylistbackend.herokuapp.com/playlist/${rplaylistId}/${rsongId}`
-      )
+      .delete(`${endpointURL}/playlist/${rplaylistId}/${rsongId}`)
       .then(() => {
         dispatch({
           type: REMOVE_SONG_FROM_PLAYLIST,

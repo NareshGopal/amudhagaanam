@@ -6,7 +6,9 @@ import {
 } from "../actionTypes";
 import trie from "../../Autocomplete/Trie";
 
-import { getLibrary } from "../../Services/libraryService";
+import http from "../../Services/httpService";
+
+const endpointURL = http.endpointURL;
 
 const fetchSongSuccess = (data) => {
   return {
@@ -31,9 +33,8 @@ const fetchSongRequest = () => {
 export const fetchSongs = () => {
   return (dispatch) => {
     dispatch(fetchSongRequest());
-    // const songs = getLibrary();
-    axios
-      .get("https://mpplaylistbackend.herokuapp.com/library")
+    http
+      .get(`${endpointURL}/library`)
       .then((res) => {
         const songs = res.data;
         songs.map((song) => {
