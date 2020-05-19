@@ -18,6 +18,7 @@ import "./App.css";
 
 function App() {
   useEffect(() => {
+    console.log("loading data");
     store.dispatch(fetchSongs());
     store.dispatch(fetchPlaylist());
   }, []);

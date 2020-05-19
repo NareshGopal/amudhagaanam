@@ -15,6 +15,7 @@ function Playlists({
   deletePlaylist,
 }) {
   const [inputPlaylist, setInputPlaylist] = useState("");
+  const playLists = playlists.data;
 
   const handlePlaylistAddition = () => {
     if (!inputPlaylist) {
@@ -54,22 +55,26 @@ function Playlists({
           Create Playlist
         </button>
       </div>
-      {playlists
-        .sort((a, b) => b.id - a.id)
-        .map((playlist) => (
-          <Playlist
-            key={playlist.id}
-            playlistInfo={playlist}
-            deletePlaylistHandler={deletePlaylistHandler}
-          />
-        ))}
+      {playlists.isLoading ? (
+        <h3 className="loading-display-playlists">Loading...</h3>
+      ) : (
+        playLists
+          .sort((a, b) => b.id - a.id)
+          .map((playlist) => (
+            <Playlist
+              key={playlist.id}
+              playlistInfo={playlist}
+              deletePlaylistHandler={deletePlaylistHandler}
+            />
+          ))
+      )}
     </div>
   );
 }
 
 const mapStateToProps = ({ playlists }) => {
   return {
-    playlists: playlists.data,
+    playlists,
   };
 };
 

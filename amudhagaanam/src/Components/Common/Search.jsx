@@ -7,7 +7,7 @@ import {
   showHidePopover,
   changeStyle,
 } from "../../Redux/Popover/popoverAction";
-import { auto } from "async";
+import OutsideAlerter from "./OutsideAlerter";
 
 function Search() {
   const { style, visibility, data } = useSelector((state) => state.popover);
@@ -31,13 +31,15 @@ function Search() {
     }
 
     dispatch(changeStyle({ style, data: searchResult }));
-    dispatch(showHidePopover(true));
+    dispatch(showHidePopover({ isSearch: true }));
   };
 
   const clickHandler = (resultItem) => {
-    dispatch(showHidePopover(false));
+    debugger;
+
     const { type, name } = resultItem;
     history.push(`/library/${type}/${name}`);
+    dispatch(showHidePopover({ isSearch: false }));
   };
 
   return (
@@ -50,15 +52,15 @@ function Search() {
           aria-label="Search"
           onChange={changeHandler}
         />
-        {/* <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
-          Search
-        </button> */}
-        {visibility && data.length > 0 ? (
-          <ListGroup
-            itemsList={data}
-            style={style}
-            clickHandler={clickHandler}
-          />
+
+        {visibility.isSearch && data.length > 0 ? (
+          <OutsideAlerter hideListGroup={showHidePopover}>
+            <ListGroup
+              itemsList={data}
+              style={style}
+              clickHandler={clickHandler}
+            />
+          </OutsideAlerter>
         ) : null}
       </form>
     </>

@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { toast } from "react-toastify";
 import moment from "moment";
 import {
   showHidePopover,
@@ -27,7 +26,7 @@ function TableBody(props) {
     };
 
     dispatch(changeStyle({ style, data }));
-    dispatch(showHidePopover(true));
+    dispatch(showHidePopover({ isPlaylist: true }));
   };
 
   const removeHandler = (data) => {

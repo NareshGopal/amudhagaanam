@@ -2,7 +2,7 @@ import { SHOW_HIDE_POPOVER, CHANGE_STYLE } from "../actionTypes";
 
 const initialState = {
   data: "",
-  visibility: false,
+  visibility: { isSearch: false, isPlaylist: false },
   style: {},
 };
 
@@ -12,7 +12,7 @@ export default function (state = initialState, action) {
     case SHOW_HIDE_POPOVER:
       return {
         ...state,
-        visibility: payload,
+        visibility: { ...state.visibility, ...payload },
       };
     case CHANGE_STYLE:
       return {

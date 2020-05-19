@@ -8,14 +8,18 @@ function Library({ songs }) {
     <div className="songs-table-container">
       <h1>All Songs</h1>
       <br />
-      <Table data={songs} />
+      {songs.isLoading ? (
+        <h3 className="loading-display">Loading...</h3>
+      ) : (
+        <Table data={songs.data} />
+      )}
     </div>
   );
 }
 
 const mapStateToProps = ({ songs }) => {
   return {
-    songs: songs.data,
+    songs,
   };
 };
 

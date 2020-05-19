@@ -10,6 +10,12 @@ body {
   flex-direction: column;
 }
 
+.loading-display-playlists {
+  position: relative;
+  top: 200px;
+  left: 300px;
+}
+
 .clickable {
   cursor: pointer;
 }
@@ -89,6 +95,10 @@ body {
   height: 38px;
   border-radius: 20px;
   border: none;
+}
+
+.list-group-item {
+  z-index: 3;
 }
 
 .list-group-item:hover {

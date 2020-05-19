@@ -87,19 +87,24 @@ export const deletePlaylist = (playlistId) => {
 
 export const addSongToPlaylist = (data) => {
   return (dispatch) => {
+    debugger;
     const { songId, playlistId } = data;
-    http
-      .post(`${endpointURL}/playlist/${playlistId}/${songId}`)
-      .then(() => {
-        dispatch({
-          type: ADD_SONG_TO_PLAYLIST,
-          payload: data,
+    if (typeof songId == "number" && typeof playlistId == "number") {
+      http
+        .post(`${endpointURL}/playlist/${playlistId}/${songId}`)
+        .then(() => {
+          dispatch({
+            type: ADD_SONG_TO_PLAYLIST,
+            payload: data,
+          });
+          toast.success("Song has been added to the playlist");
+        })
+        .catch(() => {
+          toast.error("Error in adding song to playlist");
         });
-        toast.success("Song has been added to the playlist");
-      })
-      .catch(() => {
-        toast.error("Error in adding song to playlist");
-      });
+    } else {
+      toast.error("Something went wrong");
+    }
   };
 };
 

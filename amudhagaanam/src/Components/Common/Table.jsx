@@ -3,7 +3,7 @@ import TableHeader from "./TableHeader";
 import TableBody from "./TableBody";
 import ListGroup from "../ListGroup";
 import { useSelector, useDispatch } from "react-redux";
-import { toast } from "react-toastify";
+import OutsideAlerter from "./OutsideAlerter";
 import { addSongToPlaylist } from "../../Redux/Playlists/playlistAction";
 import { showHidePopover } from "../../Redux/Popover/popoverAction";
 
@@ -17,7 +17,7 @@ function Table(props) {
 
   const insertSongToPlaylist = (playlistId) => {
     const payload = { songId, playlistId: playlistId.id };
-    dispatch(showHidePopover(false));
+    dispatch(showHidePopover({ isPlaylist: false }));
     dispatch(addSongToPlaylist(payload));
   };
 
@@ -27,12 +27,14 @@ function Table(props) {
         <TableHeader removeSongFlag={props.removeSongFlag} />
         <TableBody data={props.data} removeSongFlag={props.removeSongFlag} />
       </table>
-      {visibility && playlists.data.length > 0 ? (
-        <ListGroup
-          itemsList={playlists.data}
-          style={style}
-          clickHandler={insertSongToPlaylist}
-        />
+      {visibility.isPlaylist && playlists.data.length > 0 ? (
+        <OutsideAlerter hideListGroup={showHidePopover}>
+          <ListGroup
+            itemsList={playlists.data}
+            style={style}
+            clickHandler={insertSongToPlaylist}
+          />
+        </OutsideAlerter>
       ) : null}
     </>
   );

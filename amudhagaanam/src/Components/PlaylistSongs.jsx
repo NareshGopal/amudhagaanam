@@ -14,7 +14,10 @@ function PlaylistSongs(props) {
   let { id } = useParams();
 
   useEffect(() => {
-    setMyPlaylist(playlists.filter((pl) => pl.id == id)[0].name);
+    if (playlists && playlists.length > 0) {
+      setMyPlaylist(playlists.filter((pl) => pl.id == id)[0].name);
+    } else {
+    }
   }, [id, playlists]);
 
   const getSongsFromPlaylist = (id) => {
@@ -34,7 +37,7 @@ function PlaylistSongs(props) {
     });
   };
 
-  getSongsFromPlaylist(props.match.params.id);
+  getSongsFromPlaylist(id);
 
   return (
     <div className="songs-table-container">
