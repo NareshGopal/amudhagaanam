@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
+import { showHidePopover } from "../../Redux/Popover/popoverAction";
 
 /**
  * Hook that alerts clicks outside of the passed ref
@@ -12,11 +13,10 @@ function useOutsideAlerter(ref, hideList) {
     /**
      * Alert if clicked on outside of element
      */
-    console.log("inside use effect");
+
     function handleClickOutside(event) {
-      console.log("inside handle click");
       if (ref.current && !ref.current.contains(event.target)) {
-        dispatch(hideList());
+        dispatch(showHidePopover(hideList));
       }
     }
     // Bind the event listener
@@ -33,13 +33,13 @@ function useOutsideAlerter(ref, hideList) {
  */
 function OutsideAlerter(props) {
   const wrapperRef = useRef(null);
-  useOutsideAlerter(wrapperRef, props.hideListGroup);
+  useOutsideAlerter(wrapperRef, props.hideList);
   return <div ref={wrapperRef}>{props.children}</div>;
 }
 
 OutsideAlerter.propTypes = {
   children: PropTypes.element.isRequired,
-  hideListGroup: PropTypes.func.isRequired,
+  hideList: PropTypes.object.isRequired,
 };
 
 export default OutsideAlerter;

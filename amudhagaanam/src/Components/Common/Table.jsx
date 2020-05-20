@@ -28,7 +28,7 @@ function Table(props) {
         <TableBody data={props.data} removeSongFlag={props.removeSongFlag} />
       </table>
       {visibility.isPlaylist && playlists.data.length > 0 ? (
-        <OutsideAlerter hideListGroup={showHidePopover}>
+        <OutsideAlerter hideList={{ isPlaylist: false }}>
           <ListGroup
             itemsList={playlists.data}
             style={style}

@@ -54,7 +54,7 @@ function Search() {
         />
 
         {visibility.isSearch && data.length > 0 ? (
-          <OutsideAlerter hideListGroup={showHidePopover}>
+          <OutsideAlerter hideList={{ isSearch: false }}>
             <ListGroup
               itemsList={data}
               style={style}
